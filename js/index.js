@@ -1,3 +1,12 @@
 console.log("hi");
-console.log("Day3 of not doing anything");
-console.log("Day4 of not doing anything");
+const textInput = document.querySelector('.textInput');
+const addButton = document.querySelector('.addButton');
+const clearButton = document.querySelector('.clearAll');
+
+textInput.addEventListener("click",addItem)
+
+function addItem(e)
+{
+    
+}
+console.log(textInput);
