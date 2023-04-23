@@ -18,9 +18,10 @@ body
 .flexCenter
 {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
+    margin-bottom: 30px;
 }
 
 .heading1
@@ -29,7 +30,53 @@ body
     grid-template-columns: auto auto;
     grid-template-rows: auto;
 }
-h1{
-    vertical-align: bottom;
+.img
+{
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+}
+.headingTag
+{
+    display:flex ;
+    justify-items: center;
+    align-items: center;
 }
 
+ul{
+    list-style-type: none;
+    display: grid;
+    grid-template-rows: repeat(1,2fr );
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+}
+
+li{
+    border: 2px solid #ccc;
+    width: 100%;
+    height: 100%;
+}
+
+.CRUDicons
+{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 5px;
+    gap: 5px;
+}
+
+.fa-solid
+{
+    color: black;
+}
+
+.buttonKaBaap
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button{
+    padding: 6px 12px;
+}
