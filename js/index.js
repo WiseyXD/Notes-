@@ -1,11 +1,12 @@
 console.log("hi");
-const textInput = document.querySelector('.textInput');
+let textInput = document.querySelector('.textInput');
 const addButton = document.querySelector('.addButton');
 const clearButton = document.querySelector('.clearAll'); 
 const itemList = document.querySelector('.itemList');
-const editButton = document.querySelectorAll('.fa-pen');
-console.log(editButton);
-const deleteButton = document.querySelector(".fa-trash");
+// const editButton = itemList.getElementsByClassName('.edit');
+// console.log(editButton);
+// const deleteButton = document.querySelectorAll(".delete");
+// console.log(deleteButton);
 const editMode = false; 
 
 
@@ -33,13 +34,18 @@ function addItemsToDOM(Item)
     const editButton = document.createElement("i");
     editButton.classList.add("fa-solid");
     editButton.classList.add("fa-pen");
+    editButton.classList.add("edit");
+
     const deleteButton = document.createElement("i");
     deleteButton.classList.add("fa-solid");
     deleteButton.classList.add("fa-trash");
+    deleteButton.classList.add("delete");
+
     div.appendChild(editButton);
     div.appendChild(deleteButton);
     li.appendChild(div);
     itemList.appendChild(li);
+    textInput.value = "";
 }
 
 function removeAllItems ()
@@ -50,7 +56,13 @@ function removeAllItems ()
     });
 }
 
-
+function deleteItem (e)
+{
+    console.log("hi");
+    const itemToBeDeleted = e.target.parentElement.parentElement;
+    itemToBeDeleted.remove();
+    console.log(itemToBeDeleted);
+}
 
 function editItem(e) 
 {   
@@ -70,6 +82,7 @@ function editItem(e)
             
         }); 
     });
+    textInput.value = e.target.parentElement.parentElement.textContent;
     e.stopPropagation();
 }
 
@@ -78,8 +91,25 @@ function editItem(e)
 
 console.log(textInput);
 addButton.addEventListener("click",addItem);
-editButton.forEach(element => {
-    element.addEventListener("click",editItem);
-});
-clearButton.addEventListener("click",removeAllItems)
+// editButton.forEach(element => {
+//     element.addEventListener("click",editItem);
+// });
+// deleteButton.forEach(element =>{
+//     element.addEventListener("click",deleteItem);
+// });
+clearButton.addEventListener("click",removeAllItems);
+itemList.addEventListener("DOMNodeInserted", ()=>
+{
+    const listItems = itemList.querySelectorAll("li");
+    editButtons = document.querySelectorAll(".edit");
+    deleteButtons = document.querySelectorAll(".delete");
+    console.log(editButtons);
+    console.log(deleteButtons);
+    editButtons.forEach(i =>{
+        i.addEventListener("click",editItem);
+    })
+    deleteButtons.forEach(i =>{
+        i.addEventListener("click",deleteItem);
+    }) 
+})
 // document.addEventListener("click",resetEdit);
