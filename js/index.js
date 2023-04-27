@@ -1,4 +1,5 @@
 console.log("hi");
+console.log("day 4");
 let textInput = document.querySelector('.textInput');
 const addButton = document.querySelector('.addButton');
 const clearButton = document.querySelector('.clearAll'); 
