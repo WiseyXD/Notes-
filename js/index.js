@@ -10,7 +10,8 @@ const itemList = document.querySelector('.itemList');
 // console.log(editButton);
 // const deleteButton = document.querySelectorAll(".delete");
 // console.log(deleteButton);
-const editMode = false; 
+let editMode = false;
+let itemToBeEdited;
 
 
 
@@ -69,24 +70,45 @@ function deleteItem (e)
 
 function editItem(e) 
 {   
-    // if(resetEdit())
-    // {
-    //     return;
-    // }
-    console.log("hiGG");
-    console.log(e.target);
-    e.target.parentElement.parentElement.style.border = '1px solid black';
-    e.target.parentElement.parentElement.style.color = '#ccc';
-    document.addEventListener("click",()=>{
-        const allListItems = document.querySelectorAll("li")
-        allListItems.forEach(element => {
-            element.style.border = "1px solid #ccc";
-            element.style.color = "black";
-            
-        }); 
-    });
-    textInput.value = e.target.parentElement.parentElement.textContent;
-    e.stopPropagation();
+    function editItem(e) {
+        if (editMode) {
+          return; // Only allow one item to be edited at a time
+        }
+      
+        editMode = true;
+        itemToBeEdited = e.target.parentElement.parentElement;
+        const itemText = itemToBeEdited.firstChild.textContent.trim();
+      
+        // Update the UI to show edit mode
+        itemToBeEdited.style.border = '1px solid black';
+        itemToBeEdited.style.color = '#ccc';
+        textInput.value = itemText;
+        addButton.disabled = true;
+      
+        // Add a "Save" button to the item
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save';
+        saveButton.addEventListener('click', saveItem);
+        itemToBeEdited.appendChild(saveButton);
+      
+        e.stopPropagation();
+      }
+      
+      function saveItem() {
+        const editedText = textInput.value.trim();
+      
+        if (editedText !== '') {
+          itemToBeEdited.firstChild.textContent = editedText;
+        }
+      
+        // Reset the UI and variables to exit edit mode
+        itemToBeEdited.style.border = '1px solid #ccc';
+        itemToBeEdited.style.color = 'black';
+        textInput.value = '';
+        addButton.disabled = false;
+        editMode = false;
+        itemToBeEdited.removeChild(itemToBeEdited.lastChild); // Remove the "Save" button
+      }
 }
 
 
