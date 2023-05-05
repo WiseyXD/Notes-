@@ -1,7 +1,7 @@
 console.log("hi");
 console.log("day 4");
 console.log("day 5");
-
+console.log("Day6");
 let textInput = document.querySelector('.textInput');
 const addButton = document.querySelector('.addButton');
 const clearButton = document.querySelector('.clearAll'); 
